@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DependencyValidationManager">
+    <scope name="CSS sin .min" pattern="file:*.css&amp;&amp;!file:*.min.css" />
+    <scope name="JS sin .min" pattern="file:*.js&amp;&amp;!file:*.min.js" />
+    <scope name="Archivos con .min" pattern="file:*.min.*" />
+    <scope name="Archivos sin .min" pattern="!file:*.min.*" />
+  </component>
+</project>
