@@ -37,7 +37,7 @@ class RegisterController extends Controller
 
         if($validate->isValid()){
             $email = Str::lower($request->get('Email'));
-            $user = User::query()->where('email', $email)->first();
+            $user = User::query()->where('document','=', $request->get('Documento'))->orWhere('email','=',$email)->orWhere('phone','=',$request->get('Celular'))->first();
             if(!$user){
                 $data=[
                     'name'=>$request->get('Nombres'),
