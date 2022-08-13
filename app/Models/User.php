@@ -8,8 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable{
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -17,7 +16,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
+    protected $fillable=[
         'name',
         'email',
         'password',
@@ -31,7 +30,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
+    protected $hidden=[
         'password',
     ];
 
@@ -40,7 +39,11 @@ class User extends Authenticatable
      *
      * @var array<string, string>
      */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+    protected $casts=[
+        'email_verified_at'=>'datetime',
     ];
+
+    public function scopeFindByDocumentPhone($query, $document, $phone){
+        return $query->where('document', '=', $document)->where('phone', '=', $phone);
+    }
 }

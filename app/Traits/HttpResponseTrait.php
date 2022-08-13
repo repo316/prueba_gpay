@@ -13,6 +13,10 @@ trait HttpResponseTrait{
         return $this->response(false, $code, $message_error, $data);
     }
 
+    public function defaultError(){
+        return $this->error(false, '00', 'unknown error', []);
+    }
+
     public function response(bool $status=false, string $cod_error='00', string|array $message_error='Unknown error', string|array $data=array()): array{
         return [
             'status'=>$status,

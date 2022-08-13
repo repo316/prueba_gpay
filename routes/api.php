@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\BillingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\api\RegisterController;
@@ -19,4 +20,5 @@ use \App\Http\Controllers\api\RegisterController;
 //    return $request->user();
 //});
 
-Route::post('/registro/cliente', [RegisterController::class, 'Register'])->name('register.client');
+Route::post('/registro/cliente', [RegisterController::class, 'RegistroCliente'])->name('register.client');
+Route::post('/billetera/cargar', [BillingController::class, 'RecargaBilletera'])->name('register.movement');

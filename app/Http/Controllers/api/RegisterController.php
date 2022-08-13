@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Libs\Bill;
 use App\Libs\RequestValidate;
 use App\Mail\ConfirmEmail;
 use App\Models\User;
+use App\Models\Wallet;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Traits\HttpResponseTrait;
 use Illuminate\Support\Facades\Mail;
@@ -15,7 +18,7 @@ class RegisterController extends Controller
 {
     use HttpResponseTrait;
 
-    public function Register(Request $request){
+    public function RegistroCliente(Request $request){
         $validate = new RequestValidate($request,[
             'Documento'=>[
                 'required'
@@ -50,6 +53,7 @@ class RegisterController extends Controller
 
                 $resUser = User::create($data);
                 if($resUser){
+                    Bill::createWallet($resUser->id);
                     Mail::to($email)->send(new ConfirmEmail($data['name'],$data['token']));
                     $result = $this->success($data['token']);
                 }else{
