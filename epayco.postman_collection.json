@@ -1,0 +1,431 @@
+{
+	"info": {
+		"_postman_id": "87aee87b-f7d7-43b7-a1ad-23db80150749",
+		"name": "epayco",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9053605"
+	},
+	"item": [
+		{
+			"name": "Registro Cliente",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Documento\": \"101230345\",\r\n    \"Nombres\": \"Luis Solis\",\r\n    \"Email\": \"lsolis14@test.com\",\r\n    \"Celular\": \"50687675435\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/registro/cliente",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"registro",
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registro Cliente SOAP",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					},
+					{
+						"key": "SOAPAction",
+						"value": "\"#POST\"",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\nxmlns:soap=\"http://www.w3.org/2003/05/soap-envelope/\"\r\nsoap:encodingStyle=\"http://www.w3.org/2003/05/soap-encoding\">\r\n    <soap:Body>\r\n     <Documento>101230347</Documento>\r\n     <Nombres>Luis Solis</Nombres>\r\n    <Email>lsolis17@test.com</Email>\r\n    <Celular>50687675437</Celular>\r\n    </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/registro/cliente",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"registro",
+						"cliente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar Billetera",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Documento\": \"101230345\",\r\n    \"Celular\": \"50687675435\",\r\n    \"Valor\":\"120.67\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/cargar",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"cargar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cargar Billetera SOAP",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\nxmlns:soap=\"http://www.w3.org/2003/05/soap-envelope/\"\r\nsoap:encodingStyle=\"http://www.w3.org/2003/05/soap-encoding\">\r\n    <soap:Body>\r\n     <Documento>101230347</Documento>\r\n    <Celular>50687675437</Celular>\r\n    <Valor>450.34</Valor>\r\n    </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/cargar",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"cargar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar Pago",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Documento\": \"101230345\",\r\n    \"Celular\": \"50687675435\",\r\n    \"Valor\":\"120.67\",\r\n    \"Descripcion\":\"Pago carnicería La esquina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/generar/pago",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"generar",
+						"pago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generar Pago SOAP",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Documento\": \"101230345\",\r\n    \"Celular\": \"50687675435\",\r\n    \"Valor\":\"120.67\",\r\n    \"Descripcion\":\"Pago carnicería La esquina\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/generar/pago",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"generar",
+						"pago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirmar Pago",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Documento\": \"101230345\",\r\n    \"Celular\": \"50687675435\",\r\n    \"Session\":\"62f81f2fb495f\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/confirmar/{token}/pago",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"confirmar",
+						"{token}",
+						"pago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Confirmar Pago Copy",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\nxmlns:soap=\"http://www.w3.org/2003/05/soap-envelope/\"\r\nsoap:encodingStyle=\"http://www.w3.org/2003/05/soap-encoding\">\r\n    <soap:Body>\r\n     <Documento>101230347</Documento>\r\n    <Celular>50687675437</Celular>\r\n    <Session>62f84c3d18c5b</Session>\r\n    </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/confirmar/{token}/pago",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"confirmar",
+						"{token}",
+						"pago"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Saldo",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Documento\": \"101230345\",\r\n    \"Celular\": \"50687675435\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/saldo",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"saldo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Saldo SOAP",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope\r\nxmlns:soap=\"http://www.w3.org/2003/05/soap-envelope/\"\r\nsoap:encodingStyle=\"http://www.w3.org/2003/05/soap-encoding\">\r\n    <soap:Body>\r\n     <Documento>101230347</Documento>\r\n    <Celular>50687675437</Celular>\r\n    </soap:Body>\r\n</soap:Envelope>",
+					"options": {
+						"raw": {
+							"language": "xml"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://prueba_gpay.test/api/billetera/saldo",
+					"protocol": "http",
+					"host": [
+						"prueba_gpay",
+						"test"
+					],
+					"path": [
+						"api",
+						"billetera",
+						"saldo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
