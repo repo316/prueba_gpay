@@ -4,6 +4,7 @@ namespace App\Libs;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Sabre\Xml\Service;
 
 class RequestValidate{
 
@@ -12,7 +13,7 @@ class RequestValidate{
     protected $data;
     protected $post;
 
-    public function __construct(protected Request $request, protected $rules=array(), protected $messages=array()){
+    public function __construct(protected Request &$request, protected $rules=array(), protected $messages=array()){
         $this->post=$this->request->getContent();
         $this->decodeData();
     }
@@ -22,7 +23,10 @@ class RequestValidate{
             $this->data=json_decode($this->post, true);
         }
         else{
+            $xmlPayload = new XmlPayload();
+            $this->data = $xmlPayload->setXML($this->post)->getPayload();
             $this->structuredRequest='soap';
+            $this->request->merge($this->data);
         }
     }
 
@@ -40,6 +44,10 @@ class RequestValidate{
             }
         }
         return $result;
+    }
+
+    public function getRequestType(){
+        return $this->structuredRequest;
     }
 
 }

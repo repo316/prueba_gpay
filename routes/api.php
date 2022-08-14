@@ -22,3 +22,6 @@ use \App\Http\Controllers\api\RegisterController;
 
 Route::post('/registro/cliente', [RegisterController::class, 'RegistroCliente'])->name('register.client');
 Route::post('/billetera/cargar', [BillingController::class, 'RecargaBilletera'])->name('register.movement');
+Route::post('/billetera/generar/pago', [BillingController::class, 'Pagar'])->name('register.payment');
+Route::post('/billetera/confirmar/{token}/pago', [BillingController::class, 'ConfirmarPago'])->name('confirm.payment');
+Route::post('/billetera/saldo', [BillingController::class, 'ConsultarSaldo'])->name('view.amount');

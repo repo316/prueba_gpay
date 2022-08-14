@@ -14,12 +14,11 @@ use App\Traits\HttpResponseTrait;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
-class RegisterController extends Controller
-{
+class RegisterController extends Controller{
     use HttpResponseTrait;
 
     public function RegistroCliente(Request $request){
-        $validate = new RequestValidate($request,[
+        $validate=new RequestValidate($request, [
             'Documento'=>[
                 'required'
             ],
@@ -39,8 +38,8 @@ class RegisterController extends Controller
         ]);
 
         if($validate->isValid()){
-            $email = Str::lower($request->get('Email'));
-            $user = User::query()->where('document','=', $request->get('Documento'))->orWhere('email','=',$email)->orWhere('phone','=',$request->get('Celular'))->first();
+            $email=Str::lower($request->get('Email'));
+            $user=User::query()->where('document', '=', $request->get('Documento'))->orWhere('email', '=', $email)->orWhere('phone', '=', $request->get('Celular'))->first();
             if(!$user){
                 $data=[
                     'name'=>$request->get('Nombres'),
@@ -51,20 +50,29 @@ class RegisterController extends Controller
                     'token'=>Str::random(16),
                 ];
 
-                $resUser = User::create($data);
+                $resUser=User::create($data);
                 if($resUser){
                     Bill::createWallet($resUser->id);
-                    Mail::to($email)->send(new ConfirmEmail($data['name'],$data['token']));
-                    $result = $this->success($data['token']);
-                }else{
-                    $result = $this->error('04','User not created');
+                    Mail::to($email)->send(new ConfirmEmail($data['name'], $data['token']));
+                    $result=$this->success($data['token']);
                 }
-            }else{
-                $result = $this->error('03','User founded');
+                else{
+                    $result=$this->error('04', 'User not created');
+                }
             }
-        }else{
-            $result = $this->error('02',$validate->failMessages());
+            else{
+                $result=$this->error('03', 'User founded');
+            }
         }
-        return response()->json($result,200);
+        else{
+            $result=$this->error('02', $validate->failMessages());
+        }
+
+        if($validate->getRequestType()=='json'){
+            return response()->json($result, 200);
+        }
+        else{
+            return $this->soapResponse($result);
+        }
     }
 }
