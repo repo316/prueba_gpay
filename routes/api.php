@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\api\BillingController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\api\RegisterController;
+use App\Http\Controllers\api\{
+    BillingController,
+    RegisterController,
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,29 @@ use \App\Http\Controllers\api\RegisterController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::post('/registro/cliente', [
+    RegisterController::class,
+    'RegistroCliente'
+])->name('register.client');
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+Route::name('billetera.')->prefix("billetera")->group(function(){
+    Route::post('/cargar', [
+        BillingController::class,
+        'RecargaBilletera'
+    ])->name('register.movement');
 
-Route::post('/registro/cliente', [RegisterController::class, 'RegistroCliente'])->name('register.client');
-Route::post('/billetera/cargar', [BillingController::class, 'RecargaBilletera'])->name('register.movement');
-Route::post('/billetera/generar/pago', [BillingController::class, 'Pagar'])->name('register.payment');
-Route::post('/billetera/confirmar/{token}/pago', [BillingController::class, 'ConfirmarPago'])->name('confirm.payment');
-Route::post('/billetera/saldo', [BillingController::class, 'ConsultarSaldo'])->name('view.amount');
+    Route::post('/generar/pago', [
+        BillingController::class,
+        'Pagar'
+    ])->name('register.payment');
+
+    Route::post('/confirmar/{token}/pago', [
+        BillingController::class,
+        'ConfirmarPago'
+    ])->name('confirm.payment');
+
+    Route::post('/saldo', [
+        BillingController::class,
+        'ConsultarSaldo'
+    ])->name('view.amount');
+});

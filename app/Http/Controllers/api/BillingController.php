@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Libs\Bill;
-use App\Libs\RequestValidate;
-use App\Mail\ConfirmEmail;
+use App\Libs\{
+    Bill,
+    RequestValidate,
+};
+use App\Models\{
+    Payment,
+    TokenSession,
+    User,
+    Wallet,
+};
 use App\Mail\ConfirmPaymentEmail;
-use App\Models\movement;
-use App\Models\Payment;
-use App\Models\TokenSession;
-use App\Models\User;
-use App\Models\Wallet;
 use App\Traits\HttpResponseTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
