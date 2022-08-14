@@ -20,7 +20,7 @@ trait HttpResponseTrait{
     public function soapResponse($result){
         $xml=view('soap.response_soap', ['data'=>$result])->render();
         $xml = str_replace(["\n","\s"],'',$xml);
-        return response($xml)->header('Content-Type', 'application/soap+xml; charset=utf-8');
+        return response($xml,200,['Content-Type: application/soap+xml;']);
     }
 
     public function response(bool $status=false, string $cod_error='00', string|array $message_error='Unknown error', string|array $data=array()): array{
