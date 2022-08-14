@@ -77,7 +77,12 @@ class BillingController extends Controller{
             $result=$this->error('02', $validate->failMessages());
         }
 
-        return response()->json($result);
+        if($validate->getRequestType()=='json'){
+            return response()->json($result, 200);
+        }
+        else{
+            return $this->soapResponse($result);
+        }
     }
 
     public function Pagar(Request $request){
@@ -166,7 +171,12 @@ class BillingController extends Controller{
             $result=$this->error('02', $validate->failMessages());
         }
 
-        return response()->json($result);
+        if($validate->getRequestType()=='json'){
+            return response()->json($result, 200);
+        }
+        else{
+            return $this->soapResponse($result);
+        }
     }
 
     public function ConfirmarPago(Request $request, $token){
@@ -222,7 +232,12 @@ class BillingController extends Controller{
             $result=$this->error('02', $validate->failMessages());
         }
 
-        return response()->json($result);
+        if($validate->getRequestType()=='json'){
+            return response()->json($result, 200);
+        }
+        else{
+            return $this->soapResponse($result);
+        }
     }
 
     public function ConsultarSaldo(Request $request){
@@ -260,6 +275,11 @@ class BillingController extends Controller{
             $result=$this->error('02', $validate->failMessages());
         }
 
-        return response()->json($result);
+        if($validate->getRequestType()=='json'){
+            return response()->json($result, 200);
+        }
+        else{
+            return $this->soapResponse($result);
+        }
     }
 }

@@ -17,6 +17,12 @@ trait HttpResponseTrait{
         return $this->error(false, '00', 'unknown error', []);
     }
 
+    public function soapResponse($result){
+        $xml=view('soap.response_soap', ['data'=>$result])->render();
+        $xml = str_replace(["\n","\s"],'',$xml);
+        return response($xml)->header('Content-Type', 'application/soap+xml; charset=utf-8');
+    }
+
     public function response(bool $status=false, string $cod_error='00', string|array $message_error='Unknown error', string|array $data=array()): array{
         return [
             'status'=>$status,
